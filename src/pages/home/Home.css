@@ -1,0 +1,76 @@
+/* Home.css */
+
+/* Home.css */
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #459e3c; /* Light gray background */
+    color: #3d0303; /* Dark gray text color */
+    text-align: center;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.content-blocks {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.content-block {
+    flex: 1;
+    max-width: 300px;
+    padding: 1.5rem;
+    background-color: rgb(21, 70, 21); /* White background */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333; /* Dark gray text color */
+}
+
+.cactus-image {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+
+.content-blocks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+
+.content-block {
+    flex: 1;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: rgb(9, 88, 1);
+}
+
+.content-block h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.content-block p {
+    font-size: 1.1rem;
+}

@@ -1,0 +1,10 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #459e3c; /* Light gray background */
+    color: #3d0303; /* Dark gray text color */
+    text-align: center;
+}
