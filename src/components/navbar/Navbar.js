@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { connect } from 'react-redux';
 
-const Navbar = ({ setIsLoggedIn }) => {
+const Navbar = ({ setIsLoggedIn, user }) => {
+    const [userDetail, setUserDetail] = useState(null);
+
     const handleLogout = () => {
         setIsLoggedIn(false);
+        setUserDetail(null);
     };
+
+    useEffect(() => {
+        setUserDetail(user);
+    },[user])
+
     return (
         <nav className="navbar">
             <ul className="navbar-list">
@@ -19,19 +28,35 @@ const Navbar = ({ setIsLoggedIn }) => {
                         Dashboard
                     </Link>
                 </li>
-                <li className="navbar-item">
+                {user?.role === 'admin' ? <li className="navbar-item">
                     <Link to="/users" className="navbar-link">
-                        User Management
+                        Users
+                    </Link>
+                </li> : ''}
+                <li className="navbar-item">
+                    <Link to="/bookings" className="navbar-link">
+                        Bookings
                     </Link>
                 </li>
-                <li className="navbar-item">
+                {user?.role === 'admin' ? <li className="navbar-item">
+                    <Link to="/rooms" className="navbar-link">
+                        Manage Rooms
+                    </Link>
+                </li> : ''}
+                {userDetail ? <li className="navbar-item-logout">
                     <Link onClick={handleLogout} className="navbar-link logout-button">
                         Log out
                     </Link>
-                </li>
+                </li> : ''}
             </ul>
         </nav>
     );
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+    user: state.user.user,
+  });
+  
+// export default Navbar;
+export default connect(mapStateToProps)(Navbar);
+

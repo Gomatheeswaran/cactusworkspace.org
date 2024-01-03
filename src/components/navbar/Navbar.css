@@ -18,6 +18,10 @@
     margin: 0 1rem;
 }
 
+.navbar-item-logout{
+    margin: 0 1rem;
+}
+
 .navbar-link {
     color: white;
     text-decoration: none;

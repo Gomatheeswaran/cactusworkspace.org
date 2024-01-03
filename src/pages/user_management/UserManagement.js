@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { connect } from 'react-redux';
 
-const UserManagement = () => {
+const UserManagement = ({token}) => {
   const [users, setUsers] = useState([]);
   const [userData, setUserData] = useState({
     username: "",
@@ -17,7 +18,11 @@ const UserManagement = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/users"); // Adjust the URL
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/users`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }); // Adjust the URL
       setUsers(response.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -37,7 +42,11 @@ const UserManagement = () => {
   const handleAddUser = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3001/users", userData); // Adjust the URL
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/users`, userData,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       fetchUsers();
       // Clear the form fields after adding a user
       setUserData({
@@ -59,7 +68,11 @@ const UserManagement = () => {
   // Handle user delete
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`http://localhost:3001/users/${userId}`); // Adjust the URL
+      await axios.delete(`${process.env.REACT_APP_BASE_URL}/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }); // Adjust the URL
       fetchUsers(); // Refresh the user list after deletion
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -103,10 +116,10 @@ const UserManagement = () => {
       {/* Render the list of users */}
       <ul>
         {users.map((user) => (
-          <li key={user.id}>
+          <li key={user._id}>
             {user.username} - {user.email}
-            <button onClick={() => handleEditUser(user.id)}>Edit</button>
-            <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+            <button onClick={() => handleEditUser(user._id)}>Edit</button>
+            <button onClick={() => handleDeleteUser(user._id)}>Delete</button>
           </li>
         ))}
       </ul>
@@ -114,4 +127,10 @@ const UserManagement = () => {
   );
 };
 
-export default UserManagement;
+// export default UserManagement;
+const mapStateToProps = (state) => ({
+  user: state.user.user,
+  token: state.token.token
+});
+
+export default connect(mapStateToProps)(UserManagement);

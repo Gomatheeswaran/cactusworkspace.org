@@ -43,3 +43,11 @@
 .submit-button:hover {
     background-color: #FFD43B;
 }
+  
+  .unavailable {
+    /* Styles for visually indicating unavailable or disabled time slots */
+    pointer-events: none; /* Disable pointer events */
+    opacity: 0.5; /* Reduce opacity to indicate disabled */
+    /* Add additional styles to visually indicate it's disabled */
+  }
+  
